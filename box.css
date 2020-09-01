@@ -1,0 +1,49 @@
+body{
+    margin:0 ;
+    padding:0 ;
+    background: rgb(200, 200, 200);
+    display: flex;
+}
+.box1{
+    position: fixed;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    top: 10px;
+    left: 10px;
+    width:200px ;
+    height:200px ;
+    background: rgb(0, 255, 255);
+    margin-left:10px;
+    margin-right:10px; 
+}
+
+.box2{
+    position: fixed;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 10px;
+    right: 10px;
+    width:200px ;
+    height:200px ;
+    background: rgb(0, 255, 0);
+    margin-left:10px;
+    margin-right:10px; 
+
+}
+
+.box3{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 500px;
+    background:rgb(255 ,0 ,0 );
+
+
+}
