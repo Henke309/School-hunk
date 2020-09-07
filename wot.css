@@ -1,0 +1,18 @@
+body{
+    margin: 0;
+    padding: 10;
+    background:rgb(0, 255, 255);
+    display: flex;
+}
+
+.text{
+    position: relative ;
+    top: 50%;
+    left: 50%;
+    transform: translate( -50%, -50%);
+    background:rgb(0, 255, 255) ;
+    margin-left: 1%;
+    margin-right: 7%;
+    margin-bottom: 10%;
+    margin-top: 10%;
+}
