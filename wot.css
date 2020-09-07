@@ -1,8 +1,9 @@
 body{
     margin: 0;
     padding: 10;
-    background:rgb(0, 255, 255);
-    display: flex;
+    background-image:url(https://i.pinimg.com/originals/4d/8e/cc/4d8ecc6967b4a3d475be5c4d881c4d9c.jpg);
+    background-color:#cccccc ;
+
 }
 
 .text{
@@ -10,9 +11,14 @@ body{
     top: 50%;
     left: 50%;
     transform: translate( -50%, -50%);
-    background:rgb(0, 255, 255) ;
-    margin-left: 1%;
+    background:rgba(255, 255, 255, 0.5) ;
+    margin-top: 50%;
     margin-right: 7%;
-    margin-bottom: 10%;
-    margin-top: 10%;
+    padding: 1em;
+    border:2px solid black; 
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
+
 }
