@@ -1,0 +1,38 @@
+body{
+    margin: 0;
+    padding: 0;
+
+}
+
+div{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 2px solid black;
+    border-radius: 1rem;
+    width: 20%;
+    height: 20%;
+}
+
+.box1{
+    left: 5%;
+    top: 5%;
+    background:rgba(255, 0, 0, 1);
+
+}
+
+.box2{
+    left: 25%;
+    top: 25%;
+    background:rgba(0, 255, 0, 1);
+
+}
+
+.box3{
+    left: 45%;
+    top: 45%;
+    background: rgba(0, 0, 255, 1);
+
+}
