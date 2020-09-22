@@ -1,20 +1,30 @@
+from abc import ABCMeta, abstractmethod
+
 class account():
-    def __init__(self, namn, cash, bankid):
+    idcounter = 420
+    def __init__(self, namn, cash):
         self.konto = []
         self.namn = namn
         self.cash = cash
-        self.bankid = 100
+        self.setbankid()
+    
+    def setbankid(self):
+        self.bankid = account.idcounter
+        account.idcounter += 1
 
     def addkonto(self, namn, cash, bankid):
         self.konto.append(namn, cash, bankid) 
 
-    b1 = account()
+    @abstractmethod
+    def info(self):
+        return "namn: " + self.namn +\
+            "\nPengar: " + self.cash +\
+                "\nbankid: "+ str(self.setbankid)
 
-    b1.namn(henrik)
-    b1.cash(10000)
-    
+test1 = account("henke", "10921398kr")
+test2 = account("david", "0.99kr")
 
-    print(b1)
-
+print(test1.info())
+print(test2.info())
 
     
