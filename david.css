@@ -1,0 +1,36 @@
+*{
+    outline: 1px solid black;
+}
+p{
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+h1{
+    padding-left: 0.5em;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    background: rgba(0, 255, 255, 0.1);
+}
+
+.bigbox{
+    display: inline-block;
+    padding-bottom: 10%;
+}
+
+.box2{
+    position: relative;
+    width: 65%;
+}
+
+.box3{
+    width: 65%;
+}
+
+.bild{
+    display: inline-block;
+    width: fit-content;
+}

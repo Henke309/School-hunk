@@ -1,4 +1,4 @@
-lass skolklass:
+class skolklass:
     def __init__(self, namn, antal):
         self.namn = namn
         self.antal = antal
