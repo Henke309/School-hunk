@@ -1,5 +1,8 @@
 *{
-    outline: 1px solid black;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: 1px solid red;
 }
 p{
     padding-left: 1em;
@@ -19,18 +22,20 @@ body{
 .bigbox{
     display: inline-block;
     padding-bottom: 10%;
+    width:50%;
 }
 
 .box2{
     position: relative;
-    width: 65%;
+    width: 100%;
 }
 
 .box3{
-    width: 65%;
+    width: 100%;
 }
 
 .bild{
     display: inline-block;
-    width: fit-content;
+    margin: 1em auto 0 auto;
+    float:right ;
 }

@@ -2,7 +2,7 @@ from abc import ABCMeta, abstractmethod
 
 class account():
     idcounter = 420
-    interest rate = 1.01
+    interestrate = 1.01
     def __init__(self, namn, cash):
         self.konto = []
         self.namn = namn
@@ -24,9 +24,7 @@ class account():
 
     def irate(self):
         self.irate = accrate
-        accrate = account.deposit * interest rate
-
-    def
+        accrate = account.deposit * interestrate
 
 
 
