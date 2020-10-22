@@ -69,3 +69,4 @@ class hund (djur):
     def __init__(self, namn, ras, vikt):
         djur.__init__(self, namn, ras, vikt)
 
+#hej
