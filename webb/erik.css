@@ -15,12 +15,13 @@
 }
 
 img{
-    size: 11em;
+    width: 5%;
 }
 
 .header{
     width: fit-content;
     display: inline-block;
+
 }
 
 h1{
@@ -28,5 +29,6 @@ h1{
 }
 
 .mid{
-    margin-top: 5%;
+    padding-top: 5%;
+    width: 50%;
 }
