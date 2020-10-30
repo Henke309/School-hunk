@@ -22,10 +22,10 @@ while True:
             print("Lägg till ett djur".center(50))
             print("*"*50)
             print("")
-            meny2 = input("Ska du lägga till en katt eller en hund?" "\n" "Svara med: 'katt' eller 'hund'" "\n" "svara här: ")
+            meny1 = input("Ska du lägga till en katt eller en hund?" "\n" "Svara med: 'katt' eller 'hund'" "\n" "svara här: ")
             
             
-            if meny2.lower() == "katt":
+            if meny1.lower() == "katt":
                 print("Du har valt att lägga in en katt på djurpensionatet")
                 
                 while True:
@@ -58,7 +58,7 @@ while True:
                 djurpensionat.append(katt(namn, ras, vikt))
                         
 
-            elif meny2.lower() == "hund":
+            elif meny1.lower() == "hund":
                 print("Du har valt att lägga in en hund på djurpensionatet")
 
                 while True:
@@ -92,7 +92,18 @@ while True:
 
 
     elif meny == "2":
-        pass
+        while True:
+            print("")
+            print("*"*50)
+            print("Ta bort ett djur".center(50))
+            print("*"*50)
+            print("")
+            meny2 = input("Ska du ta bort en katt eller en hund?" "\n" "Svara med: 'katt' eller 'hund'" "\n" "svara här: ")
+
+            if meny2.lower() = "katt":
+                print("Du valde att ta bort en katt")
+                djurpensionat = sorted(djurpensionat, key=lambda , k=[]) #Well, id finns inte i dictionary så vet ej hur man ska visa det.
+                print("Ange kattens id-nr för att ta bort: ")
 
 
     elif meny == "3":
