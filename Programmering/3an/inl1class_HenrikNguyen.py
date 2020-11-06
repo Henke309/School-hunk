@@ -4,11 +4,12 @@ from abc import ABCMeta, abstractmethod
 class djur ():
     idcounter = 100
 
-    def __init__(self, namn, ras, vikt):
+    def __init__(self, namn, ras, vikt, vaccinerad):
         self.namn = namn
         self.setdjurid()
         self.ras = ras
         self.vikt = vikt
+        self.vaccinerad = vaccinerad
 
     @property
     def djurid(self):
@@ -47,11 +48,7 @@ class djur ():
 
     @ras.setter
     def ras (self, value):
-        if value.isalpha():
-            self.__ras = value 
-
-        else:
-            raise SyntaxError("VILKEN RAS HAR EN SIFFRA I SITT NAMN?!?!?!?\nEller special tecken (. - _ osv)")
+        self.__ras = value 
 
     #@abstractmethod
     def info(self):
@@ -60,13 +57,12 @@ class djur ():
                 "\nRas: " + self.ras +\
                     "\nVikt: " + self.vikt
 
-
 class katt (djur):
-    def __init__(self, namn, ras, vikt):
-        djur.__init__(self, namn, ras, vikt)
+    def __init__(self, namn, ras, vikt, vaccinerad, kastrerad):
+        djur.__init__(self, namn, ras, vikt, vaccinerad)
+        self.kastrerad = kastrerad
 
 class hund (djur):
-    def __init__(self, namn, ras, vikt):
-        djur.__init__(self, namn, ras, vikt)
-
-#hej
+    def __init__(self, namn, ras, vikt, vaccinerad, chippad):
+        djur.__init__(self, namn, ras, vikt, vaccinerad)
+        self.chippad = chippad

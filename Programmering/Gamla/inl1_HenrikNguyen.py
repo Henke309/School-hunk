@@ -11,6 +11,7 @@ register.append({"namn":"Henrik", "klass":"Te18", "pnmr":"020703"})
 register.append({"namn":"Elias", "klass":"Te17", "pnmr":"011203"})
 register.append({"namn":"Simon", "klass":"Aw19", "pnmr":"030702"})
 register.append({"namn":"David", "klass":"Na18", "pnmr":"020915"})
+register.append({"namn":"Adam", "klass":"Te18", "pnmr":"020128"})
 
 while True:
     print("")
