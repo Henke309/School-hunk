@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", function(){
     let bobStartY=150;
     let bobBottomSpace=bobStartY;
 
-
     function createBob(){
         back.appendChild(bob);
         bob.classList.add('bob');
@@ -27,46 +26,48 @@ document.addEventListener("DOMContentLoaded", function(){
     class board {
         constructor(newBoardBottom){
             this.visual=document.createElement('div');
-            this.left=Math.random()*(backWidth-bobWidth);
+            this.left=Math.floor(Math.random()*(backWidth-bobWidth));
             this.bottom=newBoardBottom;
             const b=this.visual;
-            b.classList.add('board');
+            b.classList.add('platform');
             b.style.left=this.left+'px';
             b.style.bottom=this.bottom+'px';
             back.appendChild(b);
         }
     }
+    
     function createBoards(){
-        for(vdo=0;vdo<numBoards;vdo++){
+        for(counter=0;counter<numBoards;counter++){
             let boardGap=backHeight/numBoards;
-            let newBoardBottom=100+(vdo*boardGap)
-            let newBoard= new board(newBoardBottom);
+            let newBoardBottom=100+(counter*boardGap)
+            let newBoard= new board(newBoardBottom);  // Make new instance of board with parameter of newboardbottom
             boards.push(newBoard);
         }
     }
 
     function moveBoards(){
-        if (bobBottomSpace>200){
-            boards.forEach(function (board){
-                board.bottom -= boardSpeed;
-                let visual = board.visual;
-                visual.style.bottom=board.bottom+'px';
-                if(board.bottom < 10){
-                    let firstboard = board[0].visual;
-                    firstboard.classList.remove('board');
+        if(bobBottomSpace > 200) {  //DO NOT use the word board here, it WILL fuck shit up
+            boards.forEach((arrObj) => {
+                arrObj.bottom -= boardSpeed;
+                let visual = arrObj.visual;
+                visual.style.bottom = arrObj.bottom +'px';
+                if(arrObj.bottom < 5){
+                    let firstBoard =boards[0].visual;
+                    firstBoard.remove();
                     boards.shift();
                     score++;
                     let newBoard=new board (backHeight);
-                    board.push(newBoard);
+                    boards.push(newBoard);
                 }
-            })
+            });
         }
     }
 
     function main(){
         if(!GameOVer){
             createBoards();
-            createBob();  
+            createBob();
+            setInterval(moveBoards, FPS);
         }else{
             
         }
