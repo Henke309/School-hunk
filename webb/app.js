@@ -45,6 +45,16 @@ document.addEventListener("DOMContentLoaded", function(){
         }
     }
 
+    function moveBoards(){
+        if (bobBottomSpace>200){
+            boards.forEach(function (board){
+                board.bottom -= boardSpeed;
+                let visual = board.visual;
+                visual.style.bottom=board.bottom+'px';
+            })
+        }
+    }
+
     function main(){
         if(!GameOVer){
             createBoards();
