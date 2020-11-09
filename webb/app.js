@@ -51,6 +51,14 @@ document.addEventListener("DOMContentLoaded", function(){
                 board.bottom -= boardSpeed;
                 let visual = board.visual;
                 visual.style.bottom=board.bottom+'px';
+                if(board.bottom < 10){
+                    let firstboard = board[0].visual;
+                    firstboard.classList.remove('board');
+                    boards.shift();
+                    score++;
+                    let newBoard=new board (backHeight);
+                    board.push(newBoard);
+                }
             })
         }
     }
