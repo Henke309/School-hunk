@@ -50,7 +50,15 @@ class djur ():
     def ras (self, value):
         self.__ras = value 
 
-    #@abstractmethod
+    @property
+    def vaccinerad (self):
+        return self.__vaccinerad.title()
+    
+    @vaccinerad.setter
+    def vaccinerad (self, value):
+        self.__vaccinerad = value
+
+
     def info(self):
         return "Namn " + self.namn +\
             "\nId-nr: " + str(self.djurid) +\

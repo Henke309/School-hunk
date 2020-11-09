@@ -332,9 +332,11 @@ while True:
                     else:
                         for djuren in djurpensionat:
                             if vac1 == djuren.djurid:
-                                print(djuren.namn " Har blivit vaccinerat.")
+                                print(djuren.namn, " Har blivit vaccinerat.")
                                 if vac1 == djuren.djurid:
-                                    change self.vaccinerad to yes...
+                                    vaccinerad == "Ja"
+
+                    djurpensionat.append(katt(vaccinerad))
 
 
                 elif menyv.lower() == "hund":
@@ -351,9 +353,12 @@ while True:
                     else:
                         for djuren in djurpensionat:
                             if vac2 == djuren.djurid:
-                                print(djuren.namn " Har blivit vaccinerat.")
+                                print(djuren.namn, " Har blivit vaccinerat.")
                                 if vac2 == djuren.djurid:
-                                    change self.vaccinerad to yes...
+                                    vaccinerad == "Ja"
+
+                    djurpensionat.append(hund(vaccinerad))
+                                
                 else:
                     print("Ett fel uppstod, försök igen.")
 
