@@ -334,7 +334,7 @@ while True:
                             if vac1 == djuren.djurid:
                                 print(djuren.namn, " Har blivit vaccinerat.")
                                 if vac1 == djuren.djurid:
-                                    vaccinerad == "Ja"
+                                    djuren.vaccinerad == "Ja"
 
                     djurpensionat.append(katt(vaccinerad))
 
@@ -355,7 +355,7 @@ while True:
                             if vac2 == djuren.djurid:
                                 print(djuren.namn, " Har blivit vaccinerat.")
                                 if vac2 == djuren.djurid:
-                                    vaccinerad == "Ja"
+                                    djuren.vaccinerad == "Ja"
 
                     djurpensionat.append(hund(vaccinerad))
                                 
