@@ -4,12 +4,13 @@ from abc import ABCMeta, abstractmethod
 class djur ():
     idcounter = 100
 
-    def __init__(self, namn, ras, vikt, vaccinerad):
+    def __init__(self, namn, ras, vikt, hem):
+        self.hem = hem
         self.namn = namn
         self.setdjurid()
         self.ras = ras
         self.vikt = vikt
-        self.vaccinerad = vaccinerad
+        self.vaccinerad = "nej"
 
     @property
     def djurid(self):
@@ -58,6 +59,14 @@ class djur ():
     def vaccinerad (self, value):
         self.__vaccinerad = value
 
+    @property
+    def hem (self):
+        return self.__hem.title()
+
+    @hem.setter
+    def hem (self,value):
+        self.__hem = value
+
 
     def info(self):
         return "Namn " + self.namn +\
@@ -66,11 +75,11 @@ class djur ():
                     "\nVikt: " + self.vikt
 
 class katt (djur):
-    def __init__(self, namn, ras, vikt, vaccinerad, kastrerad):
-        djur.__init__(self, namn, ras, vikt, vaccinerad)
-        self.kastrerad = kastrerad
+    def __init__(self, namn, ras, vikt, hem):
+        djur.__init__(self, namn, ras, vikt)
+        self.kastrerad = "nej"
 
 class hund (djur):
-    def __init__(self, namn, ras, vikt, vaccinerad, chippad):
-        djur.__init__(self, namn, ras, vikt, vaccinerad)
-        self.chippad = chippad
+    def __init__(self, namn, ras, vikt, hem):
+        djur.__init__(self, namn, ras, vikt)
+        self.chippad = "nej"

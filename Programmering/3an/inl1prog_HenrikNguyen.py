@@ -3,24 +3,24 @@ from abc import ABCMeta, abstractmethod
 
 def visa(djurpensionat):
     for djuren in djurpensionat:
-        print("Namn: ", djuren.namn.title(),"| ""ras: ", djuren.ras.title(),"| ""vikt: ", djuren.vikt, "| ""ID: ", str(djuren.djurid))
+        print("Namn: ", djuren.namn.title(),"| ""ras: ", djuren.ras.title(),"| ""vikt: ", djuren.vikt, "| ""ID: ", str(djuren.djurid)) , "| ""Hem: ", djuren.hem.title()
 
 def vidare():
     input("Tryck på enter för att gå vidare.")
 
 djurpensionat = []
 
-djurpensionat.append(katt("Fjant", "Bondkatt", "5"))
-djurpensionat.append(katt("Sessan", "Bondkatt", "3"))
-djurpensionat.append(katt("Rufus", "Nakenkatt", "4"))
-djurpensionat.append(katt("Muffins", "Bondkatt", "9"))
-djurpensionat.append(katt("Molly", "Bondkatt", "8"))
-djurpensionat.append(katt("Nisse", "Bondkatt", "10"))
-djurpensionat.append(katt("Titti", "Bondkatt", "7"))
+djurpensionat.append(katt("Fjant", "Bondkatt", "5", "Lundgrens"))
+djurpensionat.append(katt("Sessan", "Bondkatt", "3", "Lundgrens"))
+djurpensionat.append(katt("Rufus", "Nakenkatt", "4", "Generals"))
+djurpensionat.append(katt("Muffins", "Bondkatt", "9", "Siberias"))
+djurpensionat.append(katt("Molly", "Bondkatt", "8", "Siberias"))
+djurpensionat.append(katt("Nisse", "Bondkatt", "10", "Siberias"))
+djurpensionat.append(katt("Titti", "Bondkatt", "7", "Siberias"))
 
-djurpensionat.append(hund("Gabbe", "Kinesisk nakenhund", "4"))
-djurpensionat.append(hund("Dylan", "Kinesisk nakenhund", "3"))
-djurpensionat.append(hund("Gärd", "Hälleforsare/lajka", "15"))
+djurpensionat.append(hund("Gabbe", "Kinesisk nakenhund", "4", "Lundgrens"))
+djurpensionat.append(hund("Dylan", "Kinesisk nakenhund", "3", "Lundgrens"))
+djurpensionat.append(hund("Gärd", "Hälleforsare/lajka", "15", "Siberias"))
 
 while True:      
     print("*"*50)
@@ -68,7 +68,7 @@ while True:
                     print("")
                     if namn == "":
                         print("*"*50)
-                        print("Du måste skriva ett namn.")
+                        print("Du måste skriva något.")
                         print("*"*50)
                     else:
                         break
@@ -78,7 +78,7 @@ while True:
                     print("")
                     if ras == "":
                         print("*"*50)
-                        print("Du måste skriva en ras.")
+                        print("Du måste skriva något.")
                         print("*"*50)
                     else:
                         break
@@ -93,7 +93,32 @@ while True:
                     else:
                         break
 
-                djurpensionat.append(katt(namn, ras, vikt))
+                while True:
+                    print("1. Lundgrens")
+                    print("2. General")
+                    print("3. Siberia")
+                    print("Välj något av hemmen ovan")
+                    hem = input("Svara med (1,2 eller 3): ")
+
+                    if hem == "1":
+                        for djuren in djurpensionat:
+                            print(namn.title(), " Har skrivits in på Lundgrens djurpensionat!")
+                            djuren.hem = "Lundgrens"
+
+                    elif hem == "2":
+                        for djuren in djurpensionat:
+                            print(namn.title(), " Har skrivits in på Generals djurpensionat!")
+                            djuren.hem = "Generals"
+
+                    elif hem == "3":
+                        for djuren in djurpensionat:
+                            print(namn.title(), " Har skrivits in på Siberias djurpensionat!")
+                            djuren.hem = "Siberias"
+
+                    else:
+                        break
+
+                djurpensionat.append(katt(namn, ras, vikt, hem))
 
                 print("")
                 for djuren in djurpensionat:
@@ -104,6 +129,7 @@ while True:
                         print("Ras:", djuren.ras)
                         print("Vikt:", djuren.vikt)
                         print("ID: ", str(djuren.djurid))
+                        print("Hem: ")
                         print("*"*50)  
                 vidare()    
                 break 
@@ -142,7 +168,7 @@ while True:
                     else:
                         break
 
-                djurpensionat.append(hund(namn, ras, vikt))
+                djurpensionat.append(hund(namn, ras, vikt, hem))
                 
                 print("")
                 for djuren in djurpensionat:
@@ -334,10 +360,7 @@ while True:
                             if vac1 == djuren.djurid:
                                 print(djuren.namn, " Har blivit vaccinerat.")
                                 if vac1 == djuren.djurid:
-                                    djuren.vaccinerad == "Ja"
-
-                    djurpensionat.append(katt(vaccinerad))
-
+                                    djuren.vaccinerad = "Ja"
 
                 elif menyv.lower() == "hund":
                     print("")
@@ -355,15 +378,46 @@ while True:
                             if vac2 == djuren.djurid:
                                 print(djuren.namn, " Har blivit vaccinerat.")
                                 if vac2 == djuren.djurid:
-                                    djuren.vaccinerad == "Ja"
-
-                    djurpensionat.append(hund(vaccinerad))
-                                
+                                    djuren.vaccinerad = "Ja"
+            
                 else:
                     print("Ett fel uppstod, försök igen.")
 
             elif meny4.lower() == "2":
                 print("Du har valt att kastrera en katt")
+                djurpensionat = sorted(djurpensionat, key=lambda k: k.djurid) 
+                visa(djurpensionat)
+                kast = input("Ange den vaccinerade kattens djur-ID: ")
+                if kast.lower() == "":
+                    print("Skriv nått")
+
+                elif kast.lower() == "stop":
+                    break
+
+                else:
+                    for djuren in djurpensionat:
+                        if kast == djuren.djurid:
+                            print(djuren.namn, " Har blivit kastrerad.")
+                            if kast == djuren.djurid:
+                                djuren.kastrerad == "Ja"
+
+            elif meny4.lower() == "3":
+                print("Du har valt att chipopa en hund")
+                djurpensionat = sorted(djurpensionat, key=lambda k: k.djurid) 
+                visa(djurpensionat)
+                chip = input("Ange den vaccinerade kattens djur-ID: ")
+                if chip.lower() == "":
+                    print("Skriv nått")
+
+                elif chip.lower() == "stop":
+                    break
+
+                else:
+                    for djuren in djurpensionat:
+                        if chip == djuren.djurid:
+                            print(djuren.namn, " Har blivit kastrerad.")
+                            if chip == djuren.djurid:
+                                djuren.chippad == "Ja"
 
     elif meny == "0":
         print("Du har valt att avsluta programmet!")
