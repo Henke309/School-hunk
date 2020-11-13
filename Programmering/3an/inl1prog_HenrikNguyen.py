@@ -3,7 +3,8 @@ from abc import ABCMeta, abstractmethod
 
 def visa(djurpensionat):
     for djuren in djurpensionat:
-        print("Namn: ", djuren.namn.title(),"| ""ras: ", djuren.ras.title(),"| ""vikt: ", djuren.vikt, "| ""ID: ", str(djuren.djurid)) , "| ""Hem: ", djuren.hem.title()
+        print("Namn: ", djuren.namn.title(),"| ""ras: ", djuren.ras.title(),"| ""vikt: ", djuren.vikt, "| ""ID: ", str(djuren.djurid) , "| ""Hem: ", djuren.hem.title(), "| ""Vaccinerad: ", djuren.vaccinerad.title(), "| ""Kastrerad: ", djuren.kastrerad.title(), "| ""Chippad: ", djuren.chippad.title())
+        print("-"*150)
 
 def vidare():
     input("Tryck på enter för att gå vidare.")
@@ -101,22 +102,19 @@ while True:
                     hem = input("Svara med (1,2 eller 3): ")
 
                     if hem == "1":
-                        for djuren in djurpensionat:
-                            print(namn.title(), " Har skrivits in på Lundgrens djurpensionat!")
-                            djuren.hem = "Lundgrens"
+                        hem = "Lundgrens"
+                        break
 
                     elif hem == "2":
-                        for djuren in djurpensionat:
-                            print(namn.title(), " Har skrivits in på Generals djurpensionat!")
-                            djuren.hem = "Generals"
+                        hem = "Generals"
+                        break
 
                     elif hem == "3":
-                        for djuren in djurpensionat:
-                            print(namn.title(), " Har skrivits in på Siberias djurpensionat!")
-                            djuren.hem = "Siberias"
+                        hem = "Siberias"
+                        break
 
                     else:
-                        break
+                        print("Du valde inget av alternativen ")
 
                 djurpensionat.append(katt(namn, ras, vikt, hem))
 
@@ -129,7 +127,7 @@ while True:
                         print("Ras:", djuren.ras)
                         print("Vikt:", djuren.vikt)
                         print("ID: ", str(djuren.djurid))
-                        print("Hem: ")
+                        print("Hem: ", djuren.hem)
                         print("*"*50)  
                 vidare()    
                 break 
@@ -225,6 +223,26 @@ while True:
                         if str(djuren.djurid) == delete:
                             del djurpensionat [index]
 
+            elif meny2.lower() == "hund":
+                print("Du valde att ta bort en hund")
+                djurpensionat = sorted(djurpensionat, key=lambda k: k.djurid) 
+                visa(djurpensionat)
+                print("Skriv 'stop' för att komma tillbaka till menyn")
+                delete = input("\nAnge kattens id-nr för att ta bort: ")
+                if delete.lower() == "stop":
+                    print("Du har valt att gå tillbaka till menyvalet ")
+                    break
+                else:
+                    for djuren in djurpensionat:
+                        if str(djuren.djurid) == delete:
+                            print("*"*50)
+                            print(djuren.namn.title(), " har skrivits ut från djurpensionatet")
+                            print("*"*50)
+                        
+                    for index, djuren in enumerate(djurpensionat):
+                        if str(djuren.djurid) == delete:
+                            del djurpensionat [index]
+
     elif meny == "3":
         print("Du har valt att söka efter ett djur. ")
         while True:
@@ -238,7 +256,9 @@ while True:
                     if djuren.namn.title() == search.title():
                         print("Namn: ", djuren.namn.title(),"| ""ras: ", djuren.ras.title(),"| ""vikt: ", djuren.vikt, "| ""ID: ", str(djuren.djurid))
                         vidare()
-                        break    
+                        break
+                    else:
+                        print("Kunde ej hittas")    
 
             else:
                 print("Finns ej i djurpensionatet")
@@ -263,10 +283,6 @@ while True:
 
             if meny3.lower() == "":
                 print("Du måste skriva något")
-                vidare()
-
-            elif meny3.lower() == "stop":
-                print("Du återvänder till menyn!")
                 vidare()
 
             elif meny3 == "1":
@@ -306,6 +322,7 @@ while True:
                 vidare()
             elif meny3 == "0":
                 print("Du har valt att återvända till menyn ")
+                vidare()
                 break
 
     elif meny == "5":
@@ -314,17 +331,13 @@ while True:
             print("1.Vaccinera")
             print("2.Kastrera")
             print("3.Chip-märka")
+            print("0.Återvänd till huvudmenyn")
             print("")
-            print("Skriv 'stop' för att komma tillbaka till menyn")
 
             meny4 = input("Välj något av alternativen ovan \n svara med 1,2 eller 3 \n svara här: ")
 
             if meny4.lower() == "":
                 print("Du måste skriva något")
-                vidare()
-
-            elif meny4.lower() == "stop":
-                print("Du återvänder till menyn!")
                 vidare()
 
             elif meny4.lower() == "1":
@@ -333,7 +346,7 @@ while True:
                 print("1.Katt")
                 print("2.Hund")
                 print("")
-
+                print("Skriv 'stop' för att gå tillbaka")
                 menyv = input("Välj något av alternativen ovan \n svara med 1 eller 2 \n svara här: ")
 
                 if menyv.lower() == "":
@@ -344,10 +357,11 @@ while True:
                     print("Du återvänder till menyn!")
                     vidare()
 
-                elif menyv.lower() == "katt":
+                elif menyv.lower() == "1":
                     print("Du har valt att vaccinera en katt")
                     djurpensionat = sorted(djurpensionat, key=lambda k: k.djurid) 
                     visa(djurpensionat)
+                    print("Skriv 'stop' för att gå tillbaka")
                     vac1 = input("Ange den vaccinerade kattens djur-ID: ")
                     if vac1.lower() == "":
                         print("Skriv nått")
@@ -357,15 +371,16 @@ while True:
 
                     else:
                         for djuren in djurpensionat:
-                            if vac1 == djuren.djurid:
+                            if vac1 == str(djuren.djurid):
                                 print(djuren.namn, " Har blivit vaccinerat.")
-                                if vac1 == djuren.djurid:
-                                    djuren.vaccinerad = "Ja"
+                                djuren.vaccinerad = "Ja"
+                                vidare()
 
-                elif menyv.lower() == "hund":
+                elif menyv.lower() == "2":
                     print("")
                     djurpensionat = sorted(djurpensionat, key=lambda k: k.djurid) 
                     visa(djurpensionat)
+                    print("Skriv 'stop' för att gå tillbaka")
                     vac2 = input("Ange den vaccinerade kattens djur-ID: ")
                     if vac2.lower() == "":
                         print("Skriv nått")
@@ -375,10 +390,10 @@ while True:
 
                     else:
                         for djuren in djurpensionat:
-                            if vac2 == djuren.djurid:
+                            if vac2 == str(djuren.djurid):
                                 print(djuren.namn, " Har blivit vaccinerat.")
-                                if vac2 == djuren.djurid:
-                                    djuren.vaccinerad = "Ja"
+                                djuren.vaccinerad = "Ja"
+                                vidare()
             
                 else:
                     print("Ett fel uppstod, försök igen.")
@@ -387,6 +402,7 @@ while True:
                 print("Du har valt att kastrera en katt")
                 djurpensionat = sorted(djurpensionat, key=lambda k: k.djurid) 
                 visa(djurpensionat)
+                print("Skriv 'stop' för att gå tillbaka")
                 kast = input("Ange den vaccinerade kattens djur-ID: ")
                 if kast.lower() == "":
                     print("Skriv nått")
@@ -398,13 +414,14 @@ while True:
                     for djuren in djurpensionat:
                         if kast == djuren.djurid:
                             print(djuren.namn, " Har blivit kastrerad.")
-                            if kast == djuren.djurid:
-                                djuren.kastrerad == "Ja"
+                            djuren.kastrerad = "Ja"
+                            vidare()
 
             elif meny4.lower() == "3":
                 print("Du har valt att chipopa en hund")
                 djurpensionat = sorted(djurpensionat, key=lambda k: k.djurid) 
                 visa(djurpensionat)
+                print("Skriv 'stop' för att gå tillbaka")
                 chip = input("Ange den vaccinerade kattens djur-ID: ")
                 if chip.lower() == "":
                     print("Skriv nått")
@@ -416,11 +433,17 @@ while True:
                     for djuren in djurpensionat:
                         if chip == djuren.djurid:
                             print(djuren.namn, " Har blivit kastrerad.")
-                            if chip == djuren.djurid:
-                                djuren.chippad == "Ja"
+                            djuren.chippad = "Ja"
+                            vidare()
+
+            elif meny4 == "0":
+                print("Du återvänder nu till menyn")
+                vidare()
+                break
 
     elif meny == "0":
         print("Du har valt att avsluta programmet!")
+        vidare()
         quit
 
     else:

@@ -76,10 +76,12 @@ class djur ():
 
 class katt (djur):
     def __init__(self, namn, ras, vikt, hem):
-        djur.__init__(self, namn, ras, vikt)
+        djur.__init__(self, namn, ras, vikt, hem)
         self.kastrerad = "nej"
+        self.chippad = "nej"
 
 class hund (djur):
     def __init__(self, namn, ras, vikt, hem):
-        djur.__init__(self, namn, ras, vikt)
+        djur.__init__(self, namn, ras, vikt, hem)
         self.chippad = "nej"
+        self.kastrerad = "nej"
