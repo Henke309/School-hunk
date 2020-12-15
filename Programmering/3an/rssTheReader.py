@@ -1,5 +1,6 @@
 from ftplib import FTP
-
+ftp = FTP
+'''
 ftp = FTP(host="127.0.0.1", user="root", passwd="Henkekung123")
 
 filetosend = "feed.py"
@@ -10,7 +11,7 @@ ftp.storbinary("STOR " + filetosend, file)
 
 ftp.quit()
 file.close()
-
+'''
 '''
 # Hämta en fil
 filetoget = "makefile"
@@ -27,9 +28,9 @@ file.close()
 '''
 ftp.dir()
 
-"""ftp.cwd("//nån mapp")"""
+ftp.cwd("//Ny mapp")
 
-print("nMappen nån mapp")
+print("nMappen Ny mapp")
 ftp.dir()
 
 ftp.quit()
