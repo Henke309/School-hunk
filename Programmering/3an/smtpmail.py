@@ -18,7 +18,7 @@ print("Skriv ditt meddelande. Avsluta med CTRL+Z")
 
 while True:
     line = sys.stdin.readline()
-     if not line:
+    if not line:
          break    #Avslutar med CTRL+Z
     text += line 
 
