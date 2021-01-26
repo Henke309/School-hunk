@@ -86,11 +86,17 @@ class Window:
         self.WrittenText = scrolledtext.ScrolledText(root, wrap = WORD, width = 25, height = 10, font = ("Times New Roman", 9))
         self.WrittenText.grid(row=2, column=10, pady=250, padx=850)
         self.WrittenText.focus()
+        
+        self.btnSend = Button(self.bot2Frame, text="skicka", width=10, command=self.Send)
+        self.btnSend.pack(anchor=S, side=LEFT, padx=2, pady=3)
 
         self.lblReg = Label(self.bot2Frame, text="-----")
         self.lblReg.grid(row=3, columnspan= 2, pady=5)
 
     def Login(self):
+        pass
+
+    def Send(self):
         pass
 
     def QuitProgram(self):
