@@ -2,6 +2,9 @@ from tkinter import *
 from tkinter.ttk import *
 import tkinter.messagebox as msgbox
 from tkinter import scrolledtext
+import smtplib, sys, email.utils, mailconfig, getpass 
+
+Date = email.utils.formatdate()
 
 class Window:
     def __init__(self, root):
@@ -21,13 +24,7 @@ class Window:
         self.top2Frame.pack()
 
         self.bot2Frame = Frame(self.root)
-        self.bot2Frame.pack()
-
-        self.top3Frame = Frame(self.root)
-        self.top3Frame.pack()     
-
-        self.bot3Frame = Frame(self.root)
-        self.bot3Frame.pack()        
+        self.bot2Frame.pack()      
 
         # Bygger Top-frame
         self.btnLogin = Button(self.topFrame, text="Logga in", width=10, command=self.Login)
@@ -40,17 +37,17 @@ class Window:
         self.lblReg = Label(self.botFrame, text="Inlogg...")
         self.lblReg.grid(row=1, columnspan= 2, pady=3)
 
-        self.lblTitle = Label(self.botFrame, text="E-Mail: ")
-        self.lblTitle.grid(row=2, column=0, pady=1)
+        self.lblMail = Label(self.botFrame, text="E-Mail: ")
+        self.lblMail.grid(row=2, column=0, pady=1)
 
-        self.entTitle = Entry(self.botFrame)
-        self.entTitle.grid(row=2, column=1, pady=1)
+        self.entMail = Entry(self.botFrame)
+        self.entMail.grid(row=2, column=1, pady=1)
 
-        self.lblRelease = Label(self.botFrame, text="Lösenord: ")
-        self.lblRelease.grid(row=3, column=0, pady=1)
+        self.lblPassword = Label(self.botFrame, text="Lösenord: ")
+        self.lblPassword.grid(row=3, column=0, pady=1)
 
-        self.entRelease = Entry(self.botFrame)
-        self.entRelease.grid(row=3, column=1, pady=1)
+        self.entPassword = Entry(self.botFrame)
+        self.entPassword.grid(row=3, column=1, pady=1)
 
         self.lblReg = Label(self.botFrame, text="-----")
         self.lblReg.grid(row=5, columnspan= 2, pady=5)
@@ -68,11 +65,11 @@ class Window:
 
         #Bygger Bot2-Frame
 
-        self.lblReg = Label(self.bot2Frame, text="Till: ")
-        self.lblReg.grid(row=0, column=0, pady=1)
+        self.lblTill = Label(self.bot2Frame, text="Till: ")
+        self.lblTill.grid(row=0, column=0, pady=1)
 
-        self.enttill = Entry(self.bot2Frame)
-        self.enttill.grid(row=0, column=1, pady=1)
+        self.entTill = Entry(self.bot2Frame)
+        self.entTill.grid(row=0, column=1, pady=1)
 
         self.lblSubject = Label(self.bot2Frame, text="Ämne: ")
         self.lblSubject.grid(row=1, column=0, pady=1)
@@ -81,23 +78,30 @@ class Window:
         self.entSubject.grid(row=1, column=1, pady=1)
 
         self.lblText = Label(self.bot2Frame, text="Text: ")
-        self.lblText.grid(row=2, column=0, pady=1)
+        self.lblText.grid(sticky=N, row=2, column=0, pady=1)
 
-        self.WrittenText = scrolledtext.ScrolledText(root, wrap = WORD, width = 25, height = 10, font = ("Times New Roman", 9))
-        self.WrittenText.grid(row=2, column=10, pady=250, padx=850)
+        self.WrittenText = scrolledtext.ScrolledText(self.bot2Frame, wrap = WORD, width = 25, height = 10, font = ("Times New Roman", 9))
+        self.WrittenText.grid(row=2, column=1, pady=5, )
         self.WrittenText.focus()
         
         self.btnSend = Button(self.bot2Frame, text="skicka", width=10, command=self.Send)
-        self.btnSend.pack(anchor=S, side=LEFT, padx=2, pady=3)
+        self.btnSend.grid(row=3, columnspan=2, pady=5)
 
         self.lblReg = Label(self.bot2Frame, text="-----")
-        self.lblReg.grid(row=3, columnspan= 2, pady=5)
+        self.lblReg.grid(row=4, columnspan= 2, pady=5)
 
     def Login(self):
-        pass
+        self.server = smtplib.SMTP_SSL("smtp.gmail.com")
+        self.server.login(self.entMail.get(), self.entPassword.get)
 
     def Send(self):
-        pass
+        failed = self.server.sendmail(self.entMail, self.entTill, Date, self.WrittenText)
+
+        if failed:
+            msgbox.showinfo("Felmeddelande", "Något Blev fel, Mailet skickades ej.")
+        else:
+            msgbox.showinfo("BRA", "ALLT GICK BRA")
+    
 
     def QuitProgram(self):
         msgbox.showinfo("", "Du har valt att avsluta programmet")
