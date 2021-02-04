@@ -4,7 +4,6 @@ import tkinter.messagebox as msgbox
 from tkinter import scrolledtext
 import smtplib, sys, email.utils, mailconfig, getpass 
 
-Date = email.utils.formatdate()
 
 class Window:
     def __init__(self, root):
@@ -92,10 +91,16 @@ class Window:
 
     def Login(self):
         self.server = smtplib.SMTP_SSL("smtp.gmail.com")
-        self.server.login(self.entMail.get(), self.entPassword.get)
+        
+        if self.server.login(self.entMail.get(), self.entPassword.get()):
+            msgbox.showinfo("No problemo","Eyy du loggades in!")
+
+        else:
+            msgbox.showinfo("Felmeddelande","Nooo, du loggades inte in...")
+
 
     def Send(self):
-        failed = self.server.sendmail(self.entMail, self.entTill, Date, self.WrittenText)
+        failed = self.server.sendmail(self.entMail.get(), self.entTill.get(), self.WrittenText.get(1.0,END))
 
         if failed:
             msgbox.showinfo("Felmeddelande", "Något Blev fel, Mailet skickades ej.")
