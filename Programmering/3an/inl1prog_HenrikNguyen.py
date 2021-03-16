@@ -441,10 +441,11 @@ while True:
                 vidare()
                 break
 
+
+
     elif meny == "0":
         print("Du har valt att avsluta programmet!")
-        vidare()
-        quit
+        break
 
     else:
         print("Det måste vara med en siffra...")
