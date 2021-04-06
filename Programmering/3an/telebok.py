@@ -11,7 +11,6 @@ class Window(tk.Tk):
         tk.Tk.__init__(self, *args, **kwargs)
         self.persons = []
         self.wm_title("Telefonbok")
-
         self.container = tk.Frame(self)
         self.container.pack(side="top", fill="both", expand=True)
         self.container.grid_rowconfigure(0, weight=1)
