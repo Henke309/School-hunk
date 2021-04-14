@@ -3,7 +3,7 @@ from tkinter.ttk import *
 import tkinter as tk
 import tkinter.messagebox as msgbox
 import pymysql
-db = pymysql.connect(host="localhost", user="root", password="", db="dbsdata")
+db = pymysql.connect(host="localhost", user="root", password="", db="filmregister")
 
 
 class Window(tk.Tk):
@@ -16,11 +16,10 @@ class Window(tk.Tk):
         self.container.pack(side="top", fill="both", expand=True)
         self.container.grid_rowconfigure(0, weight=1)
         self.container.grid_columnconfigure(0, weight=1)
-        self.config(width=700, height=350)
 
         self.frames = {}
 
-        for F in (Start, Add, Show):
+        for F in (Start, Add, Remove, Show):
             frame = F(self.container, self)
 
             self.frames[F] = frame
@@ -32,8 +31,8 @@ class Window(tk.Tk):
     def show_frame(self, cont):
         frame = self.frames[cont]
 
-        if cont == Show:
-            self.frames[cont].update(self.container, self)
+        #if cont == Show:
+        #self.frames[cont].update(self.container, self)
 
         frame.tkraise()
 
@@ -50,9 +49,6 @@ class Start(tk.Frame):
 
         buttonAdd = tk.Button(self, text="Lägg till en film", command=lambda: controller.show_frame(Add))
         buttonAdd.pack()
-
-        buttonChange = tk.Button(self, text="Ändra en film", command=lambda: controller.show_frame(Change))
-        buttonChange.pack()
 
         buttonRemove = tk.Button(self, text="Ta bort en film", command=lambda: controller.show_frame(Remove))
         buttonRemove.pack()
@@ -95,24 +91,17 @@ class Add(tk.Frame):
     def save(self):
         try:
             with db.cursor() as cursor:
-                sql = "INSERT INTO `tblfilmreg`(`Title`, `Genre`, `Releasee`) VALUES ([self.titleEntry],[self.genreEntry],[self.releaseEntry])"
+                sql = "INSERT INTO `film`(`Title`, `Genre`, `Releasee`) VALUES ('{}','{}',{})".format(self.titleEntry.get(),self.genreEntry.get(),self.releaseEntry.get())
 
                 cursor.execute(sql)
                 db.commit()
         except:
             db.rollback()
 
-class Change(tk.Frame):
-    def __init__(self, parent, controller):
-        tk.Frame.__init__(self, parent)
-        sql = "UPDATE * FROM tblfilmreg"
-
-        buttonBack = tk.Button(self, text="Tillbaka", command=lambda: self.controller.show_frame(Start))
-        buttonBack.pack()
-
 class Remove(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
+        self.controller = controller
 
         titleLabel = tk.Label(self, text="Title: ")
         titleLabel.grid(row=0, column=0)
@@ -127,21 +116,41 @@ class Remove(tk.Frame):
         buttonBack.grid(row=2, column=0, columnspan=2)
     
     def deletee(self):
-        sql = "DELETE * FROM tblfilmreg"
+        
+        try:
+            with db.cursor() as cursor:
+                sql = "DELETE FROM film WHERE 'Title' = '{}';".format(self.titleEntry.get())
+
+                cursor.execute(sql)
+                db.commit()
+        except:
+            db.rollback()
 
 class Show(tk.Frame):
     def __init__(self, parent, controller):
         tk.Frame.__init__(self, parent)
 
-        sql = "SELECT * FROM tblfilmreg"
-        try:
-            cursor = db.cursor()
-            cursor.execute(sql)
+        sql = "SELECT * FROM film"
+        with db.cursor() as cursor:
+                sql = "SELECT * FROM `film`"
 
-        except:
-            felLabel = tk.Label(self, text="Något blev fel")
-            felLabel.grid(row=0, column=0)
+                cursor.execute(sql)
+                results = cursor.fetchall()
+                db.commit()
+
+        scrollbar = tk.Scrollbar(self)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+        filmlist = tk.Listbox(self, yscrollcommand=scrollbar.set)
+        for film in results:
+            filmlist.insert(tk.END, "Title: {}\n".format(film[0]))
+            filmlist.insert(tk.END, "Genre: {}\n".format(film[1]))
+            filmlist.insert(tk.END, "Release: {}\n".format(film[2]))
+            filmlist.insert(tk.END, "\n")
         
+        filmlist.pack(side=tk.LEFT, expand=1, fill=tk.BOTH)
+        scrollbar.config(command=filmlist.yview)
+
         buttonBack = tk.Button(self, text="Tillbaka", command=lambda: controller.show_frame(Start))
         buttonBack.pack()
 
