@@ -116,14 +116,14 @@ class Remove(tk.Frame):
         buttonBack.grid(row=2, column=0, columnspan=2)
     
     def deletee(self):
-        
         try:
             with db.cursor() as cursor:
-                sql = "DELETE FROM film WHERE 'Title' = '{}';".format(self.titleEntry.get())
+                sql = "DELETE FROM film WHERE Title = '{}';".format(self.titleEntry.get())
 
                 cursor.execute(sql)
                 db.commit()
-        except:
+        except Exception as e:
+            print(str(e))
             db.rollback()
 
 class Show(tk.Frame):
